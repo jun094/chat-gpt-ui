@@ -4,7 +4,7 @@ type PageBottomFixedProps = {
 
 function PageBottomFixed({ children }: PageBottomFixedProps) {
   return (
-    <section className="sticky bottom-0 flex items-center w-full px-4 h-[62px] bg-slate-400">
+    <section className="sticky bottom-0 flex items-center w-full px-4 h-[70px] bg-slate-300">
       {children}
     </section>
   );
