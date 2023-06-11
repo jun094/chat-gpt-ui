@@ -4,6 +4,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size?: 'lg' | 'md' | 'sm';
   color?: 'primary' | 'dark';
+  disabled?: boolean;
   className?: string;
 }
 
@@ -12,6 +13,7 @@ const Button = (props: ButtonProps) => {
     children,
     size = 'md',
     color = 'primary',
+    disabled,
     className,
     ...rest
   } = props;
@@ -32,7 +34,8 @@ const Button = (props: ButtonProps) => {
         {
           'bg-red-400 text-white': color === 'primary',
           'bg-stone-800 text-white': color === 'dark',
-        }
+        },
+        disabled && 'opacity-40'
       )}
       {...rest}
     >

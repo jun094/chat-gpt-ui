@@ -3,7 +3,7 @@ type PageContentsProps = {
 };
 
 function PageContents({ children }: PageContentsProps) {
-  return <section className="flex-1">{children}</section>;
+  return <section className="flex-1 w-full">{children}</section>;
 }
 
 export default PageContents;
