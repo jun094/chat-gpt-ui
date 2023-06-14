@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import Button from '@/components/Button';
 import { usePostQuestion } from '@/hooks/fetch/useFetchChat';
@@ -7,12 +8,13 @@ import { useGetGptAnswer } from '@/hooks/fetch/useFetchGpt';
 import type { ChatItemType } from '@/types/chat.type';
 
 export default function ChatBottomForm() {
+  const queryClient = useQueryClient();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [question, setQuestion] = useState<string>('');
 
-  const { refetch } = useGetGptAnswer(question, false);
-  const { mutate } = usePostQuestion();
+  const { data, refetch } = useGetGptAnswer(question, false);
+  const { mutateAsync } = usePostQuestion();
   const isDisabledForm = false;
   // const isDisabledForm = status === 'loading'; // 첫 렌더링시, isLoading = true 이므로, status 사용
 
@@ -21,11 +23,14 @@ export default function ChatBottomForm() {
 
     const question = inputRef.current?.value || '';
 
-    // mutate({
-    //   question,
-    // });
-
     await refetch();
+
+    const answer = queryClient.getQueryData(['all', 'gpt-answer']) as string;
+
+    await mutateAsync({
+      question,
+      answer,
+    });
     inputRef.current.value = '';
   };
 

@@ -2,6 +2,7 @@ import { useGetChatList } from '@/hooks/fetch/useFetchChat';
 import { useGetGptAnswer } from '@/hooks/fetch/useFetchGpt';
 
 import type { ChatItemType } from '@/types/chat.type';
+import ChatItem from '../ChatItem';
 
 function ChatList() {
   /**

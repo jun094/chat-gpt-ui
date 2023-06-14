@@ -9,10 +9,13 @@ const getChat = async () => {
   return data;
 };
 
-const postChat = async ({ question }: Pick<ChatItemType, 'question'>) => {
+const postChat = async ({
+  question,
+  answer,
+}: Pick<ChatItemType, 'question' | 'answer'>) => {
   const { data } = await axios.post(`${API_URL}/chat`, {
     question,
-    answer: 'ChatGPT 답변...',
+    answer,
   });
   return data;
 };
